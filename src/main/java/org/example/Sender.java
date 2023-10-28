@@ -11,9 +11,17 @@ public class Sender {
 
     public static void main(String[] args) {
         List<String> dbIPs = List.of("192.168.1.1", "192.168.1.2");
-        
 
 
 
+
+    }
+
+    public static class SenderThread implements Runnable {
+
+        @Override
+        public void run() {
+
+        }
     }
 }
