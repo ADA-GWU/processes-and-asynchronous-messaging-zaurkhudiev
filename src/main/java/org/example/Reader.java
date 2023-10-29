@@ -19,19 +19,22 @@ public class Reader {
         ) {
             new Thread(() -> {
                 while (true) {
-                    try (Connection connection = DriverManager.getConnection("jdbc:postgresql://" + ip + ":5432/postgres", USERNAME, PASSWORD)) {
+
+                    final String url = "jdbc:postgresql://" + ip + ":5432/postgres";
+
+                    try (Connection c = DriverManager.getConnection(url, USERNAME, PASSWORD)) {
                         String select = "SELECT id, SENDER_NAME, MESSAGE, SENT_TIME FROM ASYNC_MESSAGE WHERE RECEIVED_TIME IS NULL AND SENDER_NAME != ? LIMIT 1 FOR UPDATE";
 
-                        try (PreparedStatement preparedStatement = connection.prepareStatement(select)) {
+                        try (PreparedStatement preparedStatement = c.prepareStatement(select)) {
                             preparedStatement.setString(1, READER_NAME);
                             ResultSet data = preparedStatement.executeQuery();
                             if (data.next()) {
                                 System.out.printf("Sender " + data.getString("SENDER_NAME") + " sent " + data.getString("MESSAGE") + " at time " + data.getTimestamp("SENT_TIME"));
 
                                 String update = "UPDATE ASYNC_MESSAGE SET RECEIVED_TIME = CURRENT_TIMESTAMP WHERE id = ?";
-                                try (PreparedStatement statementToUpdate = connection.prepareStatement(update)) {
+                                try (PreparedStatement statementToUpdate = c.prepareStatement(update)) {
                                     statementToUpdate.setInt(1, data.getInt("id"));
-                                    int updated  = statementToUpdate.executeUpdate();
+                                    int updated = statementToUpdate.executeUpdate();
 
                                     if (updated > 0) {
                                         System.out.print("Message is set with Current time!");
@@ -39,17 +42,17 @@ public class Reader {
                                         System.out.print("Unable to set current time!");
                                     }
                                 }
-
                             }
+
+                            Thread.sleep(3000);
                         }
 
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-
+                }
+            }).start();
         }
     }
 }
-}
+

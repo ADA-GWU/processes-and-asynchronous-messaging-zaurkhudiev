@@ -58,15 +58,18 @@ public class Sender {
         }
 
         public void send(String name, String senderMessage) {
-            try (Connection connection = DriverManager.getConnection("jdbc:postgresql://" + ipOfDatabase + ":5432/postgres", USERNAME, PASSWORD)) {
+
+            final String  url = "jdbc:postgresql://" + ipOfDatabase + ":5432/postgres";
+
+            try (Connection c = DriverManager.getConnection(url, USERNAME, PASSWORD)) {
                 String insert = "INSERT INTO ASYNC_MESSAGE(SENDER_NAME, MESSAGE, SENT_TIME) VALUES(?, ?, CURRENT_TIMESTAMP)";
-                try (PreparedStatement s = connection.prepareStatement(insert)) {
+                try (PreparedStatement s = c.prepareStatement(insert)) {
 
                     s.setString(1, name);
                     s.setString(2, senderMessage);
                     s.executeUpdate();
 
-                    System.out.println("Message" + senderMessage + "successfully inserted to" + ipOfDatabase + "!");
+                    System.out.println("Message " + senderMessage + "successfully inserted to " + ipOfDatabase + "!");
 
 
                 }
