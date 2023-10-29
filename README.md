@@ -35,9 +35,11 @@ For the next process check below:
 
 2.	Open cmd
 
-3.	Write "javac Sender.java" then "java Sender.java"
+3.	Type cd and paste path 
 
-4.	Enter IP addresses + port numbers and database names, use: <database_ip:port_number/database_name> if you have finished writing the inputs please type: done. IT WANTS YOU TO ENTER NOT ONLY THE IP ADDRESS but also PORT NUMBER AND DATABASE NAME because THERE CAN BE DIFFERENT PORT NUMBERS OR DATABASE NAMES. You need to write for example like
+4.Write "javac Sender.java" then "java Sender.java"
+
+4.1 Enter IP addresses + port numbers and database names, use: <database_ip:port_number/database_name> if you have finished writing the inputs please type: done. IT WANTS YOU TO ENTER NOT ONLY THE IP ADDRESS but also PORT NUMBER AND DATABASE NAME because THERE CAN BE DIFFERENT PORT NUMBERS OR DATABASE NAMES. You need to write for example like
 
 For first database: 127.0.0.1:5432/postgres
 for second database: 127.0.0.2:5433/root
@@ -45,9 +47,9 @@ for second database: 127.0.0.2:5433/root
 and so on
 
 
-4.1 Write your name
+4.2 Write your name
 
-4.2 Write your message
+4.3 Write your message
 
    
 5. Write "javac Reader.java" then "java Reader.java"
