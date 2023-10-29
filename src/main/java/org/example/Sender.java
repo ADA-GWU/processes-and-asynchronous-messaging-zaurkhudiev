@@ -35,7 +35,7 @@ public class Sender {
         String exit = "exit";
 
         while (everythingOkay) {
-            System.out.print("Enter a message: ");
+            System.out.print("Enter your message: ");
             String message = scan.nextLine();
             if (exit.equalsIgnoreCase(message)) {
 
@@ -43,8 +43,8 @@ public class Sender {
 
             } else {
 
-            int threadIndex = (int) (Math.random() * threads.size());
-            ThreadClass selectedThread = threads.get(threadIndex);
+            int a = (int) (Math.random() * threads.size());
+            ThreadClass selectedThread = threads.get(a);
             selectedThread.send(SENDER_NAME, message);
         }
     }
@@ -57,16 +57,16 @@ public class Sender {
             this.ipOfDatabase = ipOfDatabase;
         }
 
-        public void send(String name, String message) {
+        public void send(String name, String senderMessage) {
             try (Connection connection = DriverManager.getConnection("jdbc:postgresql://" + ipOfDatabase + ":5432/postgres", USERNAME, PASSWORD)) {
                 String insert = "INSERT INTO ASYNC_MESSAGE(SENDER_NAME, MESSAGE, SENT_TIME) VALUES(?, ?, CURRENT_TIMESTAMP)";
                 try (PreparedStatement s = connection.prepareStatement(insert)) {
 
                     s.setString(1, name);
-                    s.setString(2, message);
+                    s.setString(2, senderMessage);
                     s.executeUpdate();
 
-                    System.out.println("Message" + message + "successfully inserted to" + ipOfDatabase + "!");
+                    System.out.println("Message" + senderMessage + "successfully inserted to" + ipOfDatabase + "!");
 
 
                 }
