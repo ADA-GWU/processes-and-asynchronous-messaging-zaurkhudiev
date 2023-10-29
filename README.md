@@ -37,7 +37,7 @@ For the next process check below:
 
 3.	Type cd and paste path 
 
-4.Write "javac Sender.java" then "java Sender.java"
+ 4. Write "javac Sender.java" then "java Sender.java"
 
 4.1 Enter IP addresses + port numbers and database names, use: <database_ip:port_number/database_name> if you have finished writing the inputs please type: done. IT WANTS YOU TO ENTER NOT ONLY THE IP ADDRESS but also PORT NUMBER AND DATABASE NAME because THERE CAN BE DIFFERENT PORT NUMBERS OR DATABASE NAMES. You need to write for example like
 
