@@ -19,10 +19,13 @@ public class Sender {
 
         System.out.println("Hi");  //just checking if it works
 
-        List<String> ipOfDatabases = List.of("192.168.1.1", "192.168.1.2"); //example ips
+        List<String> ipOfData = new ArrayList<>(); //list of ips
+        ipOfData.add("192.168.1.1");
+        ipOfData.add("192.168.1.2");
+
         List<ThreadClass> threads = new ArrayList<>();
 
-        for (String ip : ipOfDatabases) {           //foreach that takes ips one by one
+        for (String ip : ipOfData) {           //foreach that takes ips one by one
             ThreadClass threadClass = new ThreadClass(ip);
             threads.add(threadClass);
             new Thread(threadClass).start();

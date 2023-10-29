@@ -2,18 +2,21 @@ package org.example;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Reader {
 
     private static final String USERNAME = "dist_user";     //username for dockerized database
     private static final String PASSWORD = "dist_pass_123";  //password for dockerized database
+
     public static void main(String[] args) {
 
-        List<String> ipOfDatabases = List.of("192.168.1.1", "192.168.1.2");  //list of ips
-
+        List<String> ipOfData = new ArrayList<>(); //list of ips
+        ipOfData.add("192.168.1.1");
+        ipOfData.add("192.168.1.2");
         //foreach
-        for (String ip : ipOfDatabases
+        for (String ip : ipOfData
         ) {
             new Thread(() -> {
                 while (true) {
