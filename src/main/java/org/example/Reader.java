@@ -4,6 +4,7 @@ package org.example;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Reader {
 
@@ -12,21 +13,38 @@ public class Reader {
 
     public static void main(String[] args) {
 
+
         List<String> ipOfData = new ArrayList<>(); //list of ips
-        ipOfData.add("127.0.0.1");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter IP addresses + port numbers and database names, use: <database_ip:port_number/database_name> if you have finished writing the inputs please type: done");
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("done")) {
+                break;
+            }
+
+            ipOfData.add(input);
+        }
+
+        Scanner scanner1 = new Scanner(System.in);
+
+        System.out.println("Please type your name which is in database already: ");
+        String input1 = scanner1.nextLine();
+
+
         //foreach
         for (String ip : ipOfData
         ) {
             new Thread(() -> {
                 while (true) {
 
-                    final String url = "jdbc:postgresql://" + ip + ":5432/postgres";   //url that helps us to make a connection with DB
+                    final String url = "jdbc:postgresql://" + ip;   //url that helps us to make a connection with DB
 
                     try (Connection c = DriverManager.getConnection(url, USERNAME, PASSWORD)) {   //takes credentials to make connection
                         String select = "SELECT id, SENDER_NAME, MESSAGE, SENT_TIME FROM ASYNC_MESSAGE WHERE RECEIVED_TIME IS NULL AND SENDER_NAME != ? LIMIT 1 FOR UPDATE";   //String query that block record because of many readers
 
                         try (PreparedStatement preparedStatement = c.prepareStatement(select)) {
-                            preparedStatement.setString(1, "ZAUR");
+                            preparedStatement.setString(1, input1);
                             ResultSet data = preparedStatement.executeQuery();
 
                             if (data.next()) {
