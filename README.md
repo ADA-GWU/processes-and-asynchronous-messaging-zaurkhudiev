@@ -42,6 +42,7 @@ For the next process check below:
 4.1 Enter IP addresses + port numbers and database names, use: <database_ip:port_number/database_name> if you have finished writing the inputs please type: done. IT WANTS YOU TO ENTER NOT ONLY THE IP ADDRESS but also PORT NUMBER AND DATABASE NAME because THERE CAN BE DIFFERENT PORT NUMBERS OR DATABASE NAMES. You need to write for example like
 
 For first database: 127.0.0.1:5432/postgres
+
 for second database: 127.0.0.2:5433/root
 
 and so on
