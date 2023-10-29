@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Sender {
 
@@ -27,8 +28,26 @@ public class Sender {
             new Thread(threadClass).start();
         }
 
+        Scanner scan = new Scanner(System.in);
 
 
+        boolean everythingOkay = true;
+        String exit = "exit";
+
+        while (everythingOkay) {
+            System.out.print("Enter a message: ");
+            String message = scan.nextLine();
+            if (exit.equalsIgnoreCase(message)) {
+
+                everythingOkay = false;
+
+            } else {
+
+            int threadIndex = (int) (Math.random() * threads.size());
+            ThreadClass selectedThread = threads.get(threadIndex);
+            selectedThread.send(SENDER_NAME, message);
+        }
+    }
     }
 
     public static class ThreadClass implements Runnable {
@@ -46,6 +65,8 @@ public class Sender {
                     s.setString(1, name);
                     s.setString(2, message);
                     s.executeUpdate();
+
+                    System.out.println("Message" + message + "successfully inserted to" + ipOfDatabase + "!");
 
 
                 }
