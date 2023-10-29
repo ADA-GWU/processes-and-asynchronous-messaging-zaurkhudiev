@@ -44,8 +44,8 @@ public class Sender {
             } else {
 
             int a = (int) (Math.random() * threads.size());
-            ThreadClass selectedThread = threads.get(a);
-            selectedThread.send(SENDER_NAME, message);
+            ThreadClass thread1 = threads.get(a);
+            thread1.send(SENDER_NAME, message);
         }
     }
     }

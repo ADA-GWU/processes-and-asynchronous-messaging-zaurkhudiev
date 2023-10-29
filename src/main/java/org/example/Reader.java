@@ -8,8 +8,6 @@ public class Reader {
 
     private static final String USERNAME = "dist_user";
     private static final String PASSWORD = "dist_pass_123";
-    private static final String READER_NAME = "Zaur";
-
     public static void main(String[] args) {
 
         List<String> ipOfDatabases = List.of("192.168.1.1", "192.168.1.2");
@@ -26,8 +24,9 @@ public class Reader {
                         String select = "SELECT id, SENDER_NAME, MESSAGE, SENT_TIME FROM ASYNC_MESSAGE WHERE RECEIVED_TIME IS NULL AND SENDER_NAME != ? LIMIT 1 FOR UPDATE";
 
                         try (PreparedStatement preparedStatement = c.prepareStatement(select)) {
-                            preparedStatement.setString(1, READER_NAME);
+                            preparedStatement.setString(1, "ZAUR");
                             ResultSet data = preparedStatement.executeQuery();
+
                             if (data.next()) {
                                 System.out.printf("Sender " + data.getString("SENDER_NAME") + " sent " + data.getString("MESSAGE") + " at time " + data.getTimestamp("SENT_TIME"));
 
