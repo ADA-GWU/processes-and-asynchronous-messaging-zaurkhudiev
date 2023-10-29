@@ -13,8 +13,7 @@ public class Reader {
     public static void main(String[] args) {
 
         List<String> ipOfData = new ArrayList<>(); //list of ips
-        ipOfData.add("192.168.1.1");
-        ipOfData.add("192.168.1.2");
+        ipOfData.add("127.0.0.1");
         //foreach
         for (String ip : ipOfData
         ) {

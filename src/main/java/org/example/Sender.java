@@ -20,14 +20,13 @@ public class Sender {
         System.out.println("Hi");  //just checking if it works
 
         List<String> ipOfData = new ArrayList<>(); //list of ips
-        ipOfData.add("192.168.1.1");
-        ipOfData.add("192.168.1.2");
+        ipOfData.add("127.0.0.1");
 
         List<ThreadClass> threads = new ArrayList<>();
 
         for (String ip : ipOfData) {           //foreach that takes ips one by one
             ThreadClass threadClass = new ThreadClass(ip);
-            threads.add(threadClass);
+            threads.add(threadClass);                                 //connects different dbs
             new Thread(threadClass).start();
         }
 
